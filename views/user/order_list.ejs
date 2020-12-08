@@ -1,0 +1,29 @@
+<div class="order_liat_area">
+    <div class="order_list_box">
+        <% if(row[0] != undefined){%>
+            <% for(var k = 0; k < row.length; k ++) {%>
+            <div class="order_list_content_box">
+                <div class="order_list_content_number">
+                    <p style="margin: 0px;">주문번호</p>
+                    <%=row[k].ORDER_NUMBER%>
+                </div>
+                <div class="order_list_book_imgbox">
+                    <img src="<%=row[k].FIRST_BOOK_IMG%>" alt="" style="width: 130px; height: 100%;">
+                </div>
+                <div class="order_list_info_box">
+                    <span style="margin-bottom: 10px;">구매금액 : <%=row[k].ORDER_TOTAL_PRICE%>원</span>
+                    <span style="margin-bottom: 10px;">주문 일시 : <%=row[k].ORDER_DATE%></span>
+                </div>
+                <div class="order_list_button_box">
+                    <button class="order_list_button">주문상세</button>
+                    <button class="order_list_button">교환신청</button>
+                    <button class="order_list_button">반품신청</button>
+                    <button class="order_list_button">구매후기</button>
+                </div>
+            </div>
+            <%}%>
+        <%} else {%>
+            주문 내역이 존재하지 않습니다.
+        <%}%>
+    </div>
+</div>
