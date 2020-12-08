@@ -1,0 +1,32 @@
+<div class="card_area">
+    <div class="card_box">
+        <% if (row.length == 3){%>
+            <p class="card_registration_text">더 이상 카드를 등록할 수 없습니다.</p>
+        <%} else {%>
+            <a class="card_registration_text" href="/card_registration"><p class="card_registration_text">카드등록</p></a>
+        <%}%>
+        <% if (row != null) {%>
+            <% for (var i = 0; i < row.length ; i++) { %>
+                <div class="card_content_box">
+                    <div class="card_content_box_left">
+                        <div class="card_content_box_title">
+                            <%= row[i].CARD_TYPE%>
+                        </div>
+                        <img class="card_content_box_img" src="/public/images/icon/credit_card_icon.png" alt="">
+                    </div>
+                    <div class="card_content_box_right">
+                        <p class="card_content_box_card_number" style="margin-top: 20px;">카드번호</p>
+                        <p class="card_content_box_card_number"><%= row[i].CARD_NUMBER%></p>
+                        <p class="card_content_box_card_number" style="margin-top: 30px; margin-bottom: 0px;">유효기간</p>
+                        <div class="card_content_box_card_box">
+                            <p class="card_content_box_card_number" style="margin-right: 115px;"><%= row[i].CARD_DATE%></p>
+                            <form method="POST" action="/board/delete_card/<%=row[i].CARD_NUMBER%>">
+                                <button>삭제</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        <%}%>
+    </div>
+</div>

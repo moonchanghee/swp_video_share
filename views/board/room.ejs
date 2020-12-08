@@ -1,0 +1,62 @@
+<script src='//code.jquery.com/jquery-1.11.1.js'></script>
+<script src="/socket.io/socket.io.js"></script>
+<div class="search_result_area">
+    <div class="book_detail_box">
+        <div class="book_detail_box_left">
+            <div class="book_detail_box_top">
+                <div class="book_detail_box_top_book_text_box">
+                    <p><%=row[0].TITLE%></p>
+                    <video  style="width: 500px; height: auto;" src="/uploads/<%=row[0].VIDEO_FILE_NAME%>" autoplay controls loop >
+                    </video>
+                    <p><%=row[0].CONTENT%></p>
+                </div>
+            </div>
+            <div class="book_detail_box_under">
+            </div>
+        </div>
+        <div class="book_detail_box_right">
+            <div><textarea name="textarea" id="textarea" cols="60" rows="30"></textarea></div>
+            <form id="form" class="form">
+             <input type="text" id="name" size = "10" value="<%=sess.user.ID%>" style="width: 50px;" disabled>
+              <input type="text" id="text"  width="250px">
+              <input type="button" id="btn" value="전송">
+              <input type="button" id="leave" value="퇴장">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    var socket = io();
+   var num
+   var row_name = '<%=row[0].NAME%>'
+   var name
+   var roomno = "room"+'<%=row[0].NUMBER%>'
+//    $('#insert').on('click' , function(){
+console.log(roomno)
+console.log("참가")
+socket.emit('roomnum' , roomno);
+
+console.log('<%=sess.user.NAME%>')
+socket.emit('name' , '<%=sess.user.NAME%>');
+
+socket.on('joinroom' , function(e){
+    name = e
+})
+
+
+$('#btn').on('click' , function(){
+    console.log("ddd")
+    console.log('<%=row[0].NAME%>')
+    console.log('<%=row[0].ID%>')
+// console.log($('#textarea2').val())
+// socket.emit('roomnum' , $('#textarea2').val());
+socket.emit('sendmsg' ,  $('#text').val() , roomno);
+
+});
+
+socket.on('msg', function(msg){ // 서버측에서 받은 이름,메시지내용을 출력창 자식노드로 추가
+    console.log(msg)
+        $('textarea').append(msg + '\n');
+        })
+
+</script>

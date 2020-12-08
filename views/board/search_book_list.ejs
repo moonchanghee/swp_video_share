@@ -1,0 +1,44 @@
+<div class="search_area">
+    <div class="search_box">
+        <div class="search_box_select_box">
+            <select class="search_select_box" name="" id="">
+                <option value="NAME">제목</option>
+                <option value="AUTHOR">저자</option>
+                <option value="PUBLICATION">출판사</option>
+            </select>
+        </div>
+        <div class="search_box_input_box">
+            <img class="search_box_input_box_img" src="/public/images/icon/search_icon.png" alt="">
+            <input class="search_box_input" type="text" name="" id="" placeholder="검색어를 입력하세요" onkeypress="enterKey();">
+                <script>
+                    enterKey = () => {
+                        if(window.event.keyCode == 13) {
+                            location.href = 'http://localhost:3000/search/'+document.querySelector('.search_box_input').value+'category=' + document.querySelector('.search_select_box').value;
+                        }
+                    }
+                </script>
+        </div>
+    </div>
+</div>
+<div class="search_result_area">
+    <div class="search_result_box">
+        <p class="search_result_box_result_text">"<%=content%>"의 검색 결과입니다.</p>
+        <div class="search_result_box_result_content_box">
+            <% if (row[0] != null) {%>
+                <% for (var i = 0; i < row.length; i ++) {%>
+                    <a href="/book/<%=row[i].BOOK_NUMBER%>">
+                        <div class="search_result_box_result_content">
+                            <div class="search_result_box_result_content_img_box">
+                                <img class="search_result_box_result_content_img" src="/public/images/book/<%=row[i].BOOK_IMG%>" alt="">
+                            </div>
+                            <p class="search_result_box_result_content_title"><%=row[i].BOOK_NAME%></p>
+                            <p class="search_result_box_result_content_sub"><%=row[i].BOOK_AUTHOR%></p>
+                        </div>
+                    </a>
+                <%}%>
+            <%} else {%>
+                <p class="null_result_text">검색하신 결과가 존재하지 않습니다!!</p>
+            <%}%>
+        </div>
+    </div>
+</div>
