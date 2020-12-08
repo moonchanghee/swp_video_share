@@ -1,0 +1,16 @@
+<div class="room_open_area">
+    <div class="room_open_box">
+        <div class="room_open_title">
+            방 개설 페이지
+        </div>
+        <form action="/board/open_room_code" method="POST" enctype="multipart/form-data">
+            <div class="room_open_title" style="margin-top: 50px; font-size: 22px; font-weight: 500;">
+                코드 - <input type="text" name="uuid" value="<%=uuid%>">
+            </div>
+            <input type="file" name="userfile"> 
+            <input type="text" name="title">
+            <input type="text" name="content">
+            <button>생성</button>
+        </form>
+    </div>
+</div>

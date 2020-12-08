@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="../public/style.css" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap"
+  rel="stylesheet"
+/>
+</head>
+<body>
+<div class="main_area" style="height: 920px;">
+    <div class="sign_box1" style="height: 400px; padding: 30; padding-bottom: 0;">
+      <div class="sign_title_box">
+          <a href="/">DNBOOK</a>
+      </div>
+      <div class="sign_title_box2">
+        계정 정보를 입력하세요
+        </div>
+        <form method="POST" action="/user/login/">
+            <input type="text" class="before_url" name="before_url" readonly style="color: transparent; border: 0; outline: none; margin: 0;" value="<%=para%>" >
+        <div class="sign_input_title">
+            아이디
+        </div>
+        <input class="sign_input" name="id" type="text" placeholder="아이디 입력" onclick="change_url()">
+        <div class="sign_input_title">
+            비밀번호
+        </div>
+        <input class="sign_input" type="password" placeholder="비밀번호 입력" name="password">
+        <button class="sign_button" onclick="change_url()">로그인</button>
+        <script>
+            change_url = () => {
+                document.querySelector('.before_url').value = String(document.querySelector('.before_url').value).replaceAll('?','/').replaceAll('*',':');
+                console.log("ㅎㅇ");
+            }
+        </script>
+        </form>
+    </div>
+    </div>
+  </div>
+</body>
+</html>

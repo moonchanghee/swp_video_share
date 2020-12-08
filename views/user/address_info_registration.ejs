@@ -1,0 +1,34 @@
+<div class="card_area" style="display: flex; flex-direction: row; justify-content: center; align-items: flex-start;">
+    <div class="address_info_box" style="align-items: flex-start; margin-top: 200px; font-size: 40px; font-weight: 700; justify-content: flex-start; width: 400px; border: 1px solid #d9d9d9; padding: 80px; padding-bottom: 120px;">
+        <div class="address_info_registration_title">
+            주소 등록
+        </div>
+        <form method="POST" action="/board/address_info_registration">
+        <div class="address_info_registration_input_title">
+            주소이름
+        </div>
+        <div class="address_info_registration_input_box">
+            <input type="text" class="address_info_registration_input_zip" name="name" placeholder="EX. 우리집">
+        </div>
+        <div class="address_info_registration_input_title">
+            우편번호
+        </div>
+        <div class="address_info_registration_input_box">
+            <input type="text" class="address_info_registration_input_zip" name="zip_code">
+        </div>
+        <div class="address_info_registration_input_title">
+            기본주소
+        </div>
+        <div class="address_info_registration_input_box">
+            <input type="text" class="address_info_registration_input_zip" name="basic_address">
+        </div>
+        <div class="address_info_registration_input_title">
+            상세주소
+        </div>
+        <div class="address_info_registration_input_box">
+            <input type="text" class="address_info_registration_input_zip" name="detail_address">
+        </div>
+        <button class="card_regist_button">주소 등록</button>
+        </form>
+    </div>
+</div>

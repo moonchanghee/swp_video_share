@@ -1,0 +1,26 @@
+<div class="card_area">
+    <div class="address_info_box">
+        <% if (row.length == 3){%>
+            <div class="address_info_registration">주소를 더 이상 등록할 수 없습니다.</div>
+        <%} else {%>
+            <a href="/mypage/address_info_registration"><div class="address_info_registration">
+                주소 등록
+            </div></a>
+        <%}%>
+        <% for (var i = 0; i < row.length; i++) {%>
+            <div class="address_info_content_box">
+                <div class="address_info_content_box_title_box">
+                    <div class="address_info_content_box_title_left_box"><%=row[i].ADDRESS_NAME%> [ <%=row[i].ADDRESS_ZIP_CODE%> ]</div>
+                    <div class="address_info_content_box_title_right_box">
+                        <button class="address_info_content_left_button">수정</button>
+                        <form method="POST" action="/board/delete_address/<%=row[i].ADDRESS_UID_CODE%>">
+                        <button id="delete_<%=row[i].ADDRESS_UID_CODE%>" class="address_info_content_right_button">삭제</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="address_info_content_box_title_basic_box"><%=row[i].ADDRESS_BASIC_ADDRESS%></div>
+                <div class="address_info_content_box_title_detail_box"><%=row[i].ADDRESS_DETAIL_ADDRESS%></div>
+            </div>
+        <%}%>
+    </div>
+</div>

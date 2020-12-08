@@ -1,0 +1,18 @@
+<div class="coupon_issue_area">
+    <div class="friend_add_box">
+        <p style="font-size: 40px; margin: 0px;">친구추가</p>
+        <div class="friend_add_box1">
+        <form action="/board/add_friend_post" method="POST">
+            <% for (var i = 0; i < row.length; i++){%>
+                <% if(sess.user.ID != row[i].ID){%>
+                    <div class="friend_add_box1_box">
+                        <input name="add" type="checkbox" value="<%=row[i].ID%>">
+                        <label for=""><%=row[i].ID%></label>
+                    </div>
+                <%}%>
+            <%}%>
+            <button>추가하기</button>
+        </form>
+        </div>
+    </div>
+</div>

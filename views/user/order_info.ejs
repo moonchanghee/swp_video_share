@@ -1,0 +1,187 @@
+<%if (row2[0] == undefined){%>
+<%} else {%>
+    <div class="cart_info_area">
+        <form method="POST" action="/board/cart_purchase">
+        <div class="cart_info_box">
+            <div class="cart_info_box_left">
+                <div class="cart_address_title">
+                    <div class="cart_address_title_left">
+                        배송주소
+                    </div>
+                    <div class="cart_address_title_right">
+                        <select class="search_select_box" name="address" id="" style="width: 100px;" onchange="change_cart_address()" style="border-radius: 0px;">
+                            <% if(address[0] != undefined) {%>
+                                <% for(var i = 0; i < address.length; i++) {%>
+                                    <option value="<%=i%>"><%=address[i].ADDRESS_NAME%></option>
+                                <%}%>
+                            <%}%>
+                        </select>
+                    </div>
+                </div>
+                <span class="zipcode_before">우편번호 : </span>
+                <input type="text" name="address_zip_code" class="cart_address_zip_code_input" readonly value="<%=address[0].ADDRESS_ZIP_CODE%>">
+                <input type="text" name="basic_address" class="cart_basic_address_input" value="<%=address[0].ADDRESS_BASIC_ADDRESS%>" readonly style="margin-top: 10px;">
+                <input type="text" name="detail_address" class="cart_detail_address_input" value="<%=address[0].ADDRESS_DETAIL_ADDRESS%>" readonly style="margin-top: 5px;">
+            </div>
+            <script>
+                change_cart_address = () => {
+                    if(event.target.value == 0){
+                        document.querySelector('.cart_address_zip_code_input').value = "<%=address[0].ADDRESS_ZIP_CODE%>"
+                        document.querySelector('.cart_basic_address_input').value = "<%=address[0].ADDRESS_BASIC_ADDRESS%>"
+                        document.querySelector('.cart_detail_address_input').value = "<%=address[0].ADDRESS_DETAIL_ADDRESS%>"
+                    }
+                    if(event.target.value == 1){
+                        document.querySelector('.cart_address_zip_code_input').value = "<%=address[1].ADDRESS_ZIP_CODE%>"
+                        document.querySelector('.cart_basic_address_input').value = "<%=address[1].ADDRESS_BASIC_ADDRESS%>"
+                        document.querySelector('.cart_detail_address_input').value = "<%=address[1].ADDRESS_DETAIL_ADDRESS%>"
+                    }
+                    if(event.target.value == 2){
+                        document.querySelector('.cart_address_zip_code_input').value = "<%=address[2].ADDRESS_ZIP_CODE%>"
+                        document.querySelector('.cart_basic_address_input').value = "<%=address[2].ADDRESS_BASIC_ADDRESS%>"
+                        document.querySelector('.cart_detail_address_input').value = "<%=address[2].ADDRESS_DETAIL_ADDRESS%>"
+                    }
+                }
+            </script>
+            <div class="cart_info_box_right">
+                <div class="cart_address_title">
+                    <div class="cart_address_title_left">
+                        결제카드
+                    </div>
+                    <div class="cart_address_title_right">
+                        <select class="search_select_box" name="card" id="" style="width: 100px;" onchange="change_cart_card()" style="border-radius: 0px;">
+                            <% if(card[0] != undefined) {%>
+                                <% for(var i = 0; i < card.length; i++) {%>
+                                    <option value="<%=i%>"><%=card[i].CARD_TYPE%></option>
+                                <%}%>
+                            <%}%>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" name="card_number" class="cart_card_number_input" readonly value="<%=card[0].CARD_NUMBER%>" style="margin-top: 35px;">
+                <input type="text" name="card_date" class="cart_card_date_input" value="<%=card[0].CARD_DATE%>" readonly style="margin-top: 5px;">
+            </div>
+            <script>
+                change_cart_card = () => {
+                    if(event.target.value == 0){
+                        document.querySelector('.cart_card_number_input').value = "<%=card[0].CARD_NUMBER%>"
+                        document.querySelector('.cart_card_date_input').value = "<%=card[0].CARD_DATE%>"
+                    }
+                    if(event.target.value == 1){
+                        document.querySelector('.cart_card_number_input').value = "<%=card[1].CARD_NUMBER%>"
+                        document.querySelector('.cart_card_date_input').value = "<%=card[1].CARD_DATE%>"
+                    }
+                    if(event.target.value == 2){
+                        document.querySelector('.cart_card_number_input').value = "<%=card[2].CARD_NUMBER%>"
+                        document.querySelector('.cart_card_date_input').value = "<%=card[2].CARD_DATE%>"
+                    }
+                }
+            </script>
+        </div>
+    </div>
+<%}%>
+<div class="cart_area">
+    <div class="cart_box">
+        <div class="cart_box_left">
+                <%if (row2[0] == undefined) {%>
+                    <div class="cart_none">장바구니에 상품이 존재하지 않습니다.</div>
+                <%} else {%>
+                    <% if(row3[0] != undefined){%>
+                        <% for(var i = 0; i < row3.length; i ++) {%>
+                        <div class="cart_box_content_area">
+                            <div class="cart_box_content_box">
+                                <div class="cart_box_content_bookbox">
+                                    <img class="cart_box_content_book" src="/public/images/book/<%=row3[i].BOOK_IMG%>">
+                                </div>
+                                <div class="cart_box_content_textbox">
+                                    <input class="cart_box_content_text_title" value="<%=row3[i].BOOK_NAME%>" readonly name="book_name"><input name="book_number" value="<%=row3[i].BOOK_NUMBER%>" style="width: 20px; border: none; outline: none; color: transparent;" readonly><input name="book_stoke" value="<%=row3[i].BOOK_STOKE%>" style="width: 20px; border: none; outline: none; color: transparent;" readonly>
+                                    <div class="cart_box_content_text_sub">
+                                        <%=row3[i].BOOK_AUTHOR%> / <%=row3[i].BOOK_PUBLICATION%> / <input id="<%=row3[i].BOOK_NUMBER%>_PRICE" value="<%=row3[i].BOOK_PRICE%>" readonly style="width: 37px; outline: none; border: none;">원 / 할인율:<input id="<%=row3[i].BOOK_NUMBER%>_DISCOUNT%>" value="<%=row3[i].BOOK_DISCOUNT_RATE%>" readonly style="width: 15px; outline: none; border: none;">% <input name="order_count_var" type="text" style="width: 10px; outline: none; border: none; color: white;" value="1" readonly>
+                                    </div>
+                                    <span>장바구니 등록 일자 : <%=row3[i].CART_REGIST_DATE%></span>
+                                    <div class="cart_box_content_count_box" style="margin-top: 0px;">
+                                        <input class="<%=row3[i].BOOK_NUMBER%>" onclick="minus();" id="cart_box_content_count_minus" value="ㅡ" readonly>
+                                        <input id="<%=row3[i].BOOK_NUMBER%>_value" class="cart_box_content_count" value="<%=row3[i].BOOK_COUNT%>" onclick="plus()" name="book_count_value" readonly>
+                                        <input class="<%=row3[i].BOOK_NUMBER%>" onclick="plus()" id="cart_box_content_count_plus" value="+" readonly>
+                                        <div class="card_delete_box">
+                                            <span onclick="location.href='/board/delete_cart/<%=row2[i].BOOK_NUMBER%>=<%=row2[i].CART_UID%>'" style="cursor:pointer;">삭제</span>
+                                            <select name="coupon" id="coupon_select" onchange="price_acount()">
+                                                <% for(var c = 0; c < coupon.length ; c++) {%>
+                                                    <option class="<%=coupon[c].coupon_type%>" value="<%=coupon[c].coupon_type%>"><%=coupon[c].coupon_type%> 쿠폰</option>
+                                                <%}%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        minus = () => {
+                                            if ( document.getElementById(String(event.target.className)+'_value').value > 1){
+                                                document.getElementById(String(event.target.className)+'_value').value = parseInt(document.getElementById(String(event.target.className)+'_value').value) - 1;
+                                                document.getElementById(String(event.target.className)+'_COUNT_PRICE').innerText = parseInt(document.getElementById(String(event.target.className)+'_COUNT_PRICE').textContent) - parseInt(document.getElementById(String(event.target.className)+'_PRICE').value);
+                                                document.getElementById(String(event.target.className)+'_COUNT_PRICE_FINAL').innerText = parseInt(document.getElementById(String(event.target.className)+'_COUNT_PRICE_FINAL').textContent) - ((parseInt(document.getElementById(String(event.target.className)+'_PRICE').value) - ((parseInt(document.getElementById(String(event.target.className)+'_PRICE').value)/100*(parseInt(document.getElementById(String(event.target.className)+'_DISCOUNT').value))))));
+                                                document.querySelector('.cart_book_all_count').value = parseInt(document.querySelector('.cart_book_all_count').value) - 1;
+                                                document.getElementById('final_total_price').value = parseInt(document.getElementById('final_total_price').value) - (parseInt(document.getElementById(String(event.target.className)+'_PRICE').value) - (parseInt(document.getElementById(String(event.target.className)+'_PRICE').value)/100*parseInt(document.getElementById(String(event.target.className)+'_DISCOUNT').value)));
+                                            }
+                                        }
+                                        plus = () => {
+                                            if ( document.getElementById(String(event.target.className)+'_value').value < 101){
+                                                document.getElementById(String(event.target.className)+'_value').value = parseInt(document.getElementById(String(event.target.className)+'_value').value) + 1;
+                                                document.getElementById(String(event.target.className)+'_COUNT_PRICE').innerText = parseInt(document.getElementById(String(event.target.className)+'_COUNT_PRICE').textContent) + parseInt(document.getElementById(String(event.target.className)+'_PRICE').value);
+                                                document.getElementById(String(event.target.className)+'_COUNT_PRICE_FINAL').innerText = parseInt(document.getElementById(String(event.target.className)+'_COUNT_PRICE_FINAL').textContent) + ((parseInt(document.getElementById(String(event.target.className)+'_PRICE').value) - ((parseInt(document.getElementById(String(event.target.className)+'_PRICE').value)/100*(parseInt(document.getElementById(String(event.target.className)+'_DISCOUNT').value))))));
+                                                document.getElementById('final_total_price').innerText = parseInt(document.getElementById('final_total_price').textContent) + parseInt(document.getElementById(String(event.target.className)+'_PRICE').value);
+                                                document.querySelector('.cart_book_all_count').value = parseInt(document.querySelector('.cart_book_all_count').value) + 1;
+                                                document.getElementById('final_total_price').value = parseInt(document.getElementById('final_total_price').value) + (parseInt(document.getElementById(String(event.target.className)+'_PRICE').value) - (parseInt(document.getElementById(String(event.target.className)+'_PRICE').value)/100*parseInt(document.getElementById(String(event.target.className)+'_DISCOUNT').value)));
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="cart_box_price_box">
+                                <p style="margin-top: 35px; margin-bottom: 0px; text-decoration: line-through;"><span id="<%=row3[i].BOOK_NUMBER%>_COUNT_PRICE"><%=row3[i].BOOK_PRICE * row3[i].BOOK_COUNT%></span>원</p>
+                                <p style="margin-top: 0px; font-size: 20px;"><span id="<%=row3[i].BOOK_NUMBER%>_COUNT_PRICE_FINAL"><%=(row3[i].BOOK_PRICE * row3[i].BOOK_COUNT) - ((row3[i].BOOK_PRICE * row3[i].BOOK_COUNT)/100 * row3[i].BOOK_DISCOUNT_RATE)%></span>원</p>
+                            </div>
+                        </div>
+                        <%}%>
+                    <%}%>
+                <%}%>
+            </div>        
+            <div class="cart_box_right">
+                <div class="cart_box_right_box">
+                    <div class="cart_box_right_title">
+                        <% var total_acount = 0 %>
+                        <% if (row2[0] == undefined) {%>
+                        <%} else {%>
+                            <% for (var q = 0; q < row3.length ; q++) {%>
+                                <% total_acount += row3[q].BOOK_COUNT %>
+                            <%}%>
+                        주문예정정보 (상품 <input type="text" class="cart_book_all_count" name="book_all_count" value="<%=total_acount%>" readonly style="margin-left: 10px;">개)
+                        <%}%>
+                    </div>
+                    <div class="cart_box_payamount_box">
+                        <div class="cart_box_payamount_left">
+                            결제 예정금액
+                        </div>
+                        <div class="cart_box_payamount_right">
+                            <% var total_result_price = 0; %>
+                            <%if (row2[0] == undefined) {%>
+                            <%} else {%>
+                                <%if (row3[0] != undefined) {%>
+                                    <% for (var j = 0; j < row3.length; j++) {%>
+                                        <% total_result_price = total_result_price + ((row3[j].BOOK_PRICE * row3[j].BOOK_COUNT) - (row3[j].BOOK_PRICE * row3[j].BOOK_COUNT)/100 * row3[j].BOOK_DISCOUNT_RATE)%>
+                                    <%}%>
+                                <%}%>
+                            <%} %>
+                            <input name="cart_total_price" id="final_total_price" value="<%= total_result_price%>">
+                            <span class="cart_box_payamount_right_sub">원</span>
+                        </div>
+                    </div>
+                    <div class="cart_box_pay_button_box">
+                        <%if (row2[0] == undefined) {%>
+                        <%} else {%>
+                        <button class="cart_box_pay_button">주문하기</button>
+                        <%}%>
+                    </div>
+                </div>
+        </div>
+    </div> 
+</div>
+<input type="text" value="/public/images/book/<%=row3[0].BOOK_IMG%>" style="border: none; color: transparent; outline: none;" readonly name="img">
+</form>
