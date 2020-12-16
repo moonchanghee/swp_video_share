@@ -17,15 +17,11 @@ var boardRouter = require("./routes/board");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use(express.static(path.join(__dirname, "/")));
-
 app.use(
   session({
     secret: "fdasj#@U!&#%#$",
@@ -55,9 +51,14 @@ app.use(function (err, req, res, next) {
 
 var roomnum;
 var msg
+var roomnum2;
 // var ios = require("express-socket.io-session")
 // io.use(ios(session,{autoSave:true}))
 io.on('connection' , function(socket){  
+console.log("연결")
+  socket.on('test', function(msg) {
+    console.log(msg.msg);
+  });
 
   socket.on('aaaa' , function(e){
   })
@@ -72,27 +73,73 @@ io.on('connection' , function(socket){
       // console.log(num)
       roomnum = num;
       console.log(roomnum)
-      console.log("ddddddddddddddddddddddddddddddddddddddddddddddddd")
+      console.log("ddddddddddddddddddddddddd")
+      // socket.join(num)
+      // console.log(socket.handshake.session.adminId)
+    });  
+//////////////////////////////////
+    socket.on('roomnum2' , function(num){
+      // console.log(num)
+      roomnum2 = num;
+      console.log(roomnum)
+      console.log("ddddddddddddddddddddddddd")
       // socket.join(num)
       // console.log(socket.handshake.session.adminId)
     });  
 
+
+    socket.on('name2' , function(name){
+      console.log("name : " + name)
+      socket.join(roomnum2 , function(){
+        io.to(roomnum2).emit('joinroom2' , name);
+      });
+    });
+
+//////////////////////////////////
     socket.on('name' , function(name){
-      console.log(name)
+      console.log("name : " + name)
       socket.join(roomnum , function(){
         io.to(roomnum).emit('joinroom' , name);
       });
     
+
 socket.on('sendmsg' , function(b ,num ){ 
   console.log( "메시지 :" +b);
   console.log(num)
-  
   msg =  name + ":" +b;
   io.to(num).emit('msg' , msg  );
 });
+
+
 });
+
+///////////////////////////////////////////////////////
+
+socket.on('sendmsg2' , function(b ,num ){ 
+  console.log( "메시지 :" +b);
+  console.log(num)
+  msg = b;
+  io.to(num).emit('msg2' , msg  );
 });
-// });
+
+// socket.on('testroomnum' , function(num){
+
+//   roomnum2 = num;
+//   console.log(roomnum2)
+
+// });  
+
+// socket.on('testname' , function(name){
+//   console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ")
+//   console.log(name)
+
+// socket.emit('testtest' , "성공")
+
+//   });
+
+
+});
+
 
 
 

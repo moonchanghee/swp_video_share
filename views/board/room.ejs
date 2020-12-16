@@ -21,6 +21,7 @@
               <input type="text" id="text"  width="250px">
               <input type="button" id="btn" value="전송">
               <input type="button" id="leave" value="퇴장">
+              <input type="button" id = "testbutton" value="초대">
             </form>
         </div>
     </div>
@@ -31,9 +32,10 @@
    var row_name = '<%=row[0].NAME%>'
    var name
    var roomno = "room"+'<%=row[0].NUMBER%>'
+   var roomno2 = "room2"
+   var friendId
 //    $('#insert').on('click' , function(){
 console.log(roomno)
-console.log("참가")
 socket.emit('roomnum' , roomno);
 
 console.log('<%=sess.user.NAME%>')
@@ -45,18 +47,48 @@ socket.on('joinroom' , function(e){
 
 
 $('#btn').on('click' , function(){
-    console.log("ddd")
-    console.log('<%=row[0].NAME%>')
-    console.log('<%=row[0].ID%>')
 // console.log($('#textarea2').val())
 // socket.emit('roomnum' , $('#textarea2').val());
 socket.emit('sendmsg' ,  $('#text').val() , roomno);
+console.log("roomno : " + roomno)
 
 });
 
 socket.on('msg', function(msg){ // 서버측에서 받은 이름,메시지내용을 출력창 자식노드로 추가
     console.log(msg)
+
         $('textarea').append(msg + '\n');
         })
 
+        $('#testbutton').on('click' ,function(){
+        friendId = prompt("친구아이디 입력")
+console.log(friendId)
+        socket.emit('roomnum2' , friendId);
+        socket.emit('name2' , '<%=sess.user.NAME%>');
+        socket.emit('sendmsg2' ,  "떠라떠라" , friendId);
+        console.log(friendId)
+        // socket.emit('leaveRoom', friendId, '<%=sess.user.NAME%>');
+        
+socket.on('joinroom2' , function(e){
+    name = e
+})
+                  
+                  })
+///////////////////////////////////////////
+
+    //     $('#testbutton').on('click' ,function(){
+    // //         socket.emit('testroomnum' , 2);
+    //               socket.emit('testname' , 2);
+    // //               console.log("!")
+    // // //   socket.on('testtest' , function(e){
+    // // //       console.log(e)
+    // // // });      
+    // // socket.emit('testmsg' , "안녕")
+    // // //   socket.on('msg2' , function(e){
+    // // //     console.log(e)
+    // // //   })
+    
+    //     })
+
 </script>
+<script src="/public/javascript/main.js"></script>
