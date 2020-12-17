@@ -12,16 +12,20 @@ var io = require('socket.io')(http);
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var boardRouter = require("./routes/board");
-
+var pythonShell = require("python-shell");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
+
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, "/")));
+
 app.use(
   session({
     secret: "fdasj#@U!&#%#$",
