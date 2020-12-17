@@ -34,21 +34,21 @@
    var roomno = "room"+'<%=row[0].NUMBER%>'
    var roomno2 = "room2"
    var friendId
-//    $('#insert').on('click' , function(){
-console.log(roomno)
-socket.emit('roomnum' , roomno);
 
-console.log('<%=sess.user.NAME%>')
-socket.emit('name' , '<%=sess.user.NAME%>');
+   socket.emit('roomnum' , roomno);
+   socket.emit('name' , '<%=sess.user.NAME%>');
+
 
 socket.on('joinroom' , function(e){
     name = e
+    console.log("방에입장")
+    $('textarea').append(   e + "님이 입장했습니다"  +'\n');
+})
+socket.on("sss" , function(e){
+    $('textarea').append(   e + "님이 입장했습니다"  +'\n');
 })
 
-
 $('#btn').on('click' , function(){
-// console.log($('#textarea2').val())
-// socket.emit('roomnum' , $('#textarea2').val());
 socket.emit('sendmsg' ,  $('#text').val() , roomno);
 console.log("roomno : " + roomno)
 
@@ -56,39 +56,31 @@ console.log("roomno : " + roomno)
 
 socket.on('msg', function(msg){ // 서버측에서 받은 이름,메시지내용을 출력창 자식노드로 추가
     console.log(msg)
-
         $('textarea').append(msg + '\n');
         })
-
         $('#testbutton').on('click' ,function(){
         friendId = prompt("친구아이디 입력")
 console.log(friendId)
         socket.emit('roomnum2' , friendId);
         socket.emit('name2' , '<%=sess.user.NAME%>');
-        socket.emit('sendmsg2' ,  "떠라떠라" , friendId);
+        socket.emit('sendmsg2' ,  "초대코드입니다" , friendId);
         console.log(friendId)
-        // socket.emit('leaveRoom', friendId, '<%=sess.user.NAME%>');
         
 socket.on('joinroom2' , function(e){
     name = e
+})               
 })
-                  
-                  })
-///////////////////////////////////////////
 
-    //     $('#testbutton').on('click' ,function(){
-    // //         socket.emit('testroomnum' , 2);
-    //               socket.emit('testname' , 2);
-    // //               console.log("!")
-    // // //   socket.on('testtest' , function(e){
-    // // //       console.log(e)
-    // // // });      
-    // // socket.emit('testmsg' , "안녕")
-    // // //   socket.on('msg2' , function(e){
-    // // //     console.log(e)
-    // // //   })
-    
-    //     })
+$('#leave').on('click' , function(){
+    socket.emit('leaveroom' , roomno);
+    history.back();
+
+});
+
+socket.on('leaveroom' , function(name){
+    $('textarea').append(  name + "님이 "+ "퇴장하셨습니다"  +'\n'); 
+    });
+
 
 </script>
 <script src="/public/javascript/main.js"></script>

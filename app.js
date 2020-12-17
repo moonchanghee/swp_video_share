@@ -78,40 +78,43 @@ console.log("연결")
       // console.log(socket.handshake.session.adminId)
     });  
 //////////////////////////////////
-    socket.on('roomnum2' , function(num){
-      // console.log(num)
-      roomnum2 = num;
-      console.log(roomnum)
-      console.log("ddddddddddddddddddddddddd")
-      // socket.join(num)
-      // console.log(socket.handshake.session.adminId)
-    });  
 
-
-    socket.on('name2' , function(name){
-      console.log("name : " + name)
-      socket.join(roomnum2 , function(){
-        io.to(roomnum2).emit('joinroom2' , name);
-      });
-    });
-
-//////////////////////////////////
     socket.on('name' , function(name){
-      console.log("name : " + name)
       socket.join(roomnum , function(){
         io.to(roomnum).emit('joinroom' , name);
       });
-    
+      io.to(roomnum).emit("sss" , name)
 
+      socket.on('leaveroom' , function(num){
+        socket.leave(num , function(){
+          // io.to(num).emit('leaveroom' , name);
+        });
+        io.to(num).emit('leaveroom' , name);
+        });
 socket.on('sendmsg' , function(b ,num ){ 
   console.log( "메시지 :" +b);
   console.log(num)
   msg =  name + ":" +b;
   io.to(num).emit('msg' , msg  );
 });
-
-
 });
+
+socket.on('name2' , function(name){
+  console.log("name : " + name)
+  socket.join(roomnum2 , function(){
+    io.to(roomnum2).emit('joinroom2' , name);
+  });
+});
+
+socket.on('roomnum2' , function(num){
+  // console.log(num)
+  roomnum2 = num;
+  console.log(roomnum)
+  console.log("ddddddddddddddddddddddddd")
+  // socket.join(num)
+  // console.log(socket.handshake.session.adminId)
+});  
+
 
 ///////////////////////////////////////////////////////
 
