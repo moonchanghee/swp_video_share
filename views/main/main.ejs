@@ -1,8 +1,16 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src='/code.jquery.com/jquery-1.11.1.js'></script>
+
 <div class="nav_area2">
     <div class="nav_box2">
       <p class="nav_area2_head_text">회원님을 기다리는</p>
       <p class="nav_area2_head_text">방송이 있어요</p>
       <p class="nav_area2_sub_text">관심있는 방송을 찾아보세요</p>
+      <% if(sess.user ) {%>
+        <button id = "testbutton" onclick="test()">전송</button>
+      <%} else {%>
+          <button id = "testbutton">전송</button>
+      <%}%>
       <p class="nav_area2_sub_text"><%=uuid%></p>
       <div class="nav_box2_img_box">
         <img class="nav_box2_img" src="../public/images/nav_box2/5f7143f20dc29.png" alt="" />
@@ -89,3 +97,31 @@
     </div>
   </div>
 </div>
+<% if (sess.user) {%>
+  <script>
+    var socket = io();
+    var num
+   var row_name = '<%=sess.user.ID%>'
+   var name
+  var roomno = "room2"
+
+// console.log('<%=row[0].NAME%>')
+socket.emit('roomnum2' , row_name);
+console.log("조인 :" +row_name)
+
+console.log('<%=sess.user.NAME%>')
+socket.emit('name2' , '<%=sess.user.NAME%>');
+
+socket.on('joinroom2' , function(e){
+    name = e
+})
+
+socket.on('msg2', function(msg){ 
+    console.log(msg)
+alert(msg)
+                  
+                  })
+
+  </script>
+    <script src="/public/javascript/main.js"></script>
+<%}%>

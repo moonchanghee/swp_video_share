@@ -40,36 +40,38 @@ Number.prototype.zf = function (len) { return this.toString().zf(len); };
 
 
 // 메인페이지
+// 메인페이지
 router.get("/", function (req, res) {
-  sess = req.session;
-  console.log("메인페이지");
-  var sql = "SELECT * FROM user";
-  function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
-  var uuid = uuidv4();
-  pool.getConnection((err, conn) => {
-    conn.query(sql, function (err, row) {
-      if (err) {
-        console.log(sql);
-        console.log(err);
-      }
-      if (row) {
-        res.render("index.ejs", {
-            title: "메인페이지",
-            page: "main/main.ejs",
-          row: row,
-          sess:sess,
-          uuid:uuid
-        });
-        conn.release();
-      }
+    sess = req.session;
+    console.log("메인페이지");
+    var sql = "SELECT * FROM user";
+    function uuidv4() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    var uuid = uuidv4();
+    pool.getConnection((err, conn) => {
+      conn.query(sql, function (err, row) {
+        if (err) {
+          console.log(sql);
+          console.log(err);
+        }
+        if (row) {
+            console.log(sess);
+          res.render("index.ejs", {
+              title: "메인페이지",
+              page: "main/main.ejs",
+            row: row,
+            sess:sess,
+            uuid:uuid
+          });
+          conn.release();
+        }
+      });
     });
   });
-});
 // 회원가입
 router.get("/sign", function (req, res) {
     console.log("회원가입");
