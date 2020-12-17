@@ -12,7 +12,7 @@ var io = require('socket.io')(http);
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var boardRouter = require("./routes/board");
-
+var pythonShell = require("python-shell");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
