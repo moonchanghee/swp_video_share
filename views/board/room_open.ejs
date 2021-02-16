@@ -1,0 +1,39 @@
+<div class="room_open_area">
+    <form action="/board/open_room_code" method="POST" enctype="multipart/form-data">
+        <div class="room_open_box">
+            <div class="room_open_title">
+                방 개설 페이지
+            </div>
+                <div class="room_open_title" style="margin-top: 50px; font-size: 30px; font-weight: 500;">
+                    <input type="text" name="uuid" value="<%=uuid%>" style="font-size: 30px; width: 600px; text-align: center;" readonly>
+                </div>
+                <div id="exhibition_image_container"></div>
+                <script> 
+                    function setThumbnail(event) { 
+                        console.log("ㅎㅇㅎㅇ");
+                        if(document.querySelector('#exhibition_image_container').children[0] != undefined){
+                            document.querySelector('#exhibition_image_container').children[0].remove();
+                        }
+                        var reader = new FileReader(); reader.onload = function(event) { 
+                        var img = document.createElement("video"); 
+                        img.setAttribute("name",'video');
+                        img.setAttribute("src", event.target.result); 
+                        document.querySelector("div#exhibition_image_container").appendChild(img); 
+                    }; 
+                    reader.readAsDataURL(event.target.files[0]);
+                    }
+                </script>
+                <div class="sign_box" style="margin-top: 1vh;">
+                    <div class="filebox"> 
+                        <label for="ex_file">비디오 업로드</label> 
+                        <input type="file" id="ex_file" accept="video/*" onchange="setThumbnail(event);" name="userfile"> 
+                    </div>
+                </div>
+                <input type="text" class="room_open_input_title" name="title" placeholder="영상 제목" style="width: 500px; margin-top: 50px; border-bottom: 1px solid #999;">
+                <input type="text" name="content" placeholder="영상 카테고리" style="width: 500px; margin-top: 20px; border-bottom: 1px solid #999;height: 30px;">
+                <button id="room_open_btn">생성</button>
+        </div>
+    </form>
+</div>
+
+<!-- 커밋 -->

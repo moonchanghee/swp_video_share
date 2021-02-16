@@ -1,0 +1,27 @@
+<style>
+    a{
+        text-decoration: none;
+        color: black;
+    }
+</style>
+<div class="search_result_area">
+    <div class="book_detail_box" style="display: flex; justify-content: flex-start; flex-direction: column; align-items: center;"> 
+        <div class="info_title" style="font-size: 32px; margin-top: 50px;">
+            개설한 방 정보
+        </div>
+        <div style="width: 700px; height: 30px; border: 1px solid #999; display: flex; justify-content: flex-start; flex-direction: row; align-items: center; margin-top: 30px;">
+            <div style="width: 70px; height: 100%; display: flex; justify-content: center; flex-direction: row; align-items: center;"></div>
+            <div style="width: 400px; height: 100%; display: flex; justify-content: center; flex-direction: row; align-items: center;">코드</div>
+            <div style="width: 235px; height: 100%; display: flex; justify-content: center; flex-direction: row; align-items: center;">제목</div>
+        </div>
+        <% for (var i = 0; i < row.length; i++){%>
+            <a href="/room/<%=row[i].NUMBER%>">
+                <div style="width: 700px; height: auto; border: 1px solid #999; display: flex; justify-content: flex-start; flex-direction: row; align-items: center; border-top: 0;">
+                    <div style="width: 70px; height: 100%; display: flex; justify-content: center; flex-direction: row; align-items: center;"><%=row[i].NUMBER%></div>
+                    <div style="width: 400px; height: 100%; display: flex; justify-content: center; flex-direction: row; align-items: center; font-size: 16px;"><%=row[i].ROOM_CODE%></div>
+                    <div style="width: 230px; height: 100%; display: flex; justify-content: center; flex-direction: row; align-items: center;"><%=row[i].TITLE%></div>
+                </div>
+            </a>
+        <%}%>
+    </div>
+</div>

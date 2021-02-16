@@ -1,0 +1,44 @@
+<div class="nav_area1">
+    <div class="nav_box">
+        <div class="nav_left_box">
+            <a class="main_nav_icon_img_box" href="/">
+              <img
+                class="main_nav_icon_img"
+                src="/public/images/nav_box2/KakaoTalk_20201218_013537825.png"
+                alt=""
+            /></a>
+            <a class="main_nav_search" href="/search">검색</a>
+          </div>
+          <div class="nav_center_box"></div>
+          <div class="nav_right_box">
+            <% if(sess.user == null) {%> 
+            <a class="main_nav_icon_img_box" href="/sign">
+                <button class="nav_box_button" style="margin-right: 10px;">
+                    회원가입
+                </button></a>
+                <a class="main_nav_icon_img_box">
+                    <button class="nav_box_button" onclick="location.href='/login/'+document.location.href.replaceAll('/','%3F').replaceAll(':','%2A')">
+                        로그인
+                    </button></a>
+            <%}%>
+            <% if(sess.user) {%>
+                <a class="main_nav_icon_img_box" href="/roominfo">
+                    <button class="nav_box_button">
+                        방정보
+                    </button></a>
+                <a class="main_nav_icon_img_box" href="/room_open">
+                    <button class="nav_box_button">
+                        방개설
+                    </button></a>
+                <a class="main_nav_icon_img_box" href="/add_friend">
+                    <button class="nav_box_button">
+                        친구추가
+                    </button></a>
+                <a class="main_nav_icon_img_box" href="/logout">
+                    <button class="nav_box_button">
+                        로그아웃
+                    </button></a>
+            <%}%>
+          </div>
+    </div>
+</div>

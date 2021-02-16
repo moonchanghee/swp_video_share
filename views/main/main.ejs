@@ -1,0 +1,122 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src='/code.jquery.com/jquery-1.11.1.js'></script>
+<div class="nav_area2">
+    <div class="nav_box2">
+      <p class="nav_area2_head_text">친구를 초대하고</p>
+      <p class="nav_area2_head_text">함께 영상을 보세요</p>
+      <p class="nav_area2_sub_text">영상을 보며 의견을 나눠보세요</p>
+      <div class="nav_box2_img_box">
+        <img class="nav_box2_img" src="../public/images/nav_box2/5f7143f20dc29.png" alt="" />
+      </div>
+    </div>
+  </div>
+<div class="main_area">
+  <div class="main_box1">
+    <div class="main_box1_head">오늘의 방송</div>
+    <div class="main_box1_content_box">
+      <div class="main_box1_content_box_left">
+        <div class="main_box1_content_box_left_top">
+          <div class="main_nav_book_box">
+            <img
+              class="main_nav_book_img"
+              src="/public/images/book/fsdu9dsaf8fasd89fsad89f9as8df8a9sd.PNG"
+              alt=""
+            />
+          </div>
+          <div class="main_nav_textbox">
+            <p class="main_nav_textbox_title">
+                챔피언스리그
+            </p>
+            <p class="main_nav_textbox_sub">
+                UEFA
+            </p>
+          </div>
+        </div>
+        <div class="main_box1_content_box_left_bottom">
+          <div class="main_nav_book_box">
+            <img
+              class="main_nav_book_img"
+              src="/public/images/book/2019100809135388272-540x759.jpg"
+              alt=""
+            />
+          </div>
+          <div class="main_nav_textbox">
+            <p class="main_nav_textbox_title">
+                2019 LOVE POEM
+            </p>
+            <p class="main_nav_textbox_sub">
+                IU Consert
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="main_box1_content_box_right">
+        <div class="main_box1_content_box_right_top">
+          <div class="main_box1_content_box_right_top_title">
+            지금 방송중인 방
+          </div>
+        </div>
+        <div class="main_box1_content_box_right_bottom">
+          <div class="main_box1_content_box_right_left">
+            <div class="main_best_book_box">
+              <img
+                class="main_best_book_box_img"
+                src="/public/images/book/onepiece_999.jpg"
+                alt=""
+              />
+            </div>
+            <p class="main_best_title">원피스 ONE PIECE 999화</p>
+            <p class="main_best_sub">대원 미디어</p>
+          </div>
+          <div class="main_box1_content_box_right_left">
+            <div class="main_best_book_box">
+              <img
+                class="main_best_book_box_img"
+                src="/public/images/book/9434f674b0ee2988e7cd329708fbd944abce464ca3ac4afc00cac71376222657d2dffce10cdd9b8a97d323e16e56ccbd148a587f7f68170224f80f5134d965607665540b56528f438c9701980b0e5380f9acf080a4bbc15870c62c45cd8813a0901a25ab888fe5bc35a24eec.jpg"
+                alt=""
+              />
+            </div>
+            <p class="main_best_title">TVN 스타트업 12화</p>
+            <p class="main_best_sub">Tvn</p>
+          </div>
+          <div class="main_box1_content_box_right_left">
+            <div class="main_best_book_box">
+              <img
+                class="main_best_book_box_img"
+                src="/public/images/book/SADFASDFASDFU123213LK123K.PNG"
+                alt=""
+              />
+            </div>
+            <p class="main_best_title">UEFA 유로파 리그</p>
+            <p class="main_best_sub">UEFA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if (sess.user) {%>
+    <script>
+      var socket = io();
+      var num
+     var row_name = '<%=sess.user.ID%>'
+     var name
+    var roomno = "room2"
+  
+  // console.log('<%=row[0].NAME%>')
+  socket.emit('roomnum2' , row_name);
+  console.log("조인 :" +row_name)
+  
+  console.log('<%=sess.user.NAME%>')
+  socket.emit('name2' , '<%=sess.user.NAME%>');
+  
+  socket.on('joinroom2' , function(e){
+      name = e
+  })
+  
+  socket.on('msg2', function(msg){ 
+      alert("초대받은 방의 코드입니다: " + msg)
+  })
+    </script>
+      <script src="/public/javascript/main.js"></script>
+  <%}%>
+</div>

@@ -1,0 +1,13 @@
+<div class="search_result_area">
+    <div class="book_detail_box" style="flex-direction: column; justify-content: flex-start; align-items: center;">
+        <script>
+            go = () => {
+                if(event.keyCode == 13){
+                    location.href='/move_room/' + document.getElementById('code').value;
+                }
+            }
+        </script>
+        <p style="font-size: 32px;">친구에게 받은 방 코드를 입력하세요.</p>
+        <input id="code" style="width: 400px; height: 30px; outline: none; border: 2px solid black; padding-left: 10px; text-align: center;" type="text" onkeypress="go(event)">
+    </div>
+</div>
